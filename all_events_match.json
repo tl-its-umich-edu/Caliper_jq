@@ -1,0 +1,345 @@
+{
+  "loggedIn": {
+    "type": "SessionEvent",
+    "action": "LoggedIn"
+  },
+  "course_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/type": "Entity",
+    "object/name": "home",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "home",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "syllabus_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "syllabus",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "syllabus",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "syllabusUpdated": {
+    "type": "Event",
+    "action": "Modified",
+    "object/type": "Document",
+    "object/name": "Syllabus"
+  },
+  "discussion_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/type": "Entity",
+    "object/name": "topics",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "topics",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "discussionTopicCreated": {
+    "type": "ThreadEvent",
+    "action": "Created",
+    "object/type": "Thread",
+    "object/name": "Topic to Discuss",
+    "object/extensions/com.instructure.canvas/is_announcement": false,
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000012"
+  },
+  "discussion_topic_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:discussion:85530000000000012",
+    "object/type": "Thread",
+    "object/extensions/com.instructure.canvas/asset_type": "discussion_topic",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000012"
+  },
+  "discussionEntryCreated": {
+    "type": "MessageEvent",
+    "action": "Posted",
+    "object/id": "urn:instructure:canvas:discussionEntry:85530000000000005",
+    "object/type": "Message",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000005"
+  },
+  "attachmentCreated": {
+    "type": "Event",
+    "action": "Created",
+    "object/type": "Document",
+    "object/name": "london_tube_map.png",
+    "object/mediaType": "image/png",
+    "object/extensions/com.instructure.canvas/filename": "london_tube_map.png",
+    "object/extensions/com.instructure.canvas/folder_id": "85530000000000194",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000620"
+  },
+  "attachmentDeleted": {
+    "type": "Event",
+    "action": "Deleted",
+    "object/type": "Document",
+    "object/name": "london_tube_map.png",
+    "object/mediaType": "image/png",
+    "object/extensions/com.instructure.canvas/filename": "london_tube_map.png",
+    "object/extensions/com.instructure.canvas/folder_id": "85530000000000194",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000620"
+  },
+  "assignmentCreated": {
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000418",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "Assignment for testing",
+    "object/dateToSubmit": "2018-03-17T03:59:59.000Z",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000418"
+  },
+  "assignment_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000418",
+    "object/type": "AssignableDigitalResource",
+    "object/extensions/com.instructure.canvas/asset_type": "assignment",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000418"
+  },
+  "assignmentUpdated": {
+    "type": "Event",
+    "action": "Modified",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000418",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "File upload assignment",
+    "object/dateToSubmit": "2018-03-17T03:59:59.000Z",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000418"
+  },
+  "assignments_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "assignments",
+    "object/id": "urn:instructure:canvas:course:85530000000000032",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "assignments",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "assignmentDeleted": {
+    "type": "Event",
+    "action": "Modified",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000419",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "assignment to delete",
+    "object/extensions/com.instructure.canvas/workflow_state": "deleted",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000419"
+  },
+  "files_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "files",
+    "object/id": "urn:instructure:canvas:course:85530000000000032",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "files",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "fileCreated": {
+    "Note": "This seems to be the same type as attachmentCreated",
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:attachment:85530000000000621",
+    "object/type": "Document",
+    "object/name": "Docx Test File.docx",
+    "object/mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "object/extensions/com.instructure.canvas/context_id": "85530000000000032",
+    "object/extensions/com.instructure.canvas/context_type": "Course",
+    "object/extensions/com.instructure.canvas/filename": "Docx+Test+File.docx",
+    "object/extensions/com.instructure.canvas/folder_id": "85530000000000187",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000621"
+  },
+  "fileDownloaded/Previewed": {
+    "Note": "No analogue in examples",
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:attachment:85530000000000621",
+    "object/type": "Entity",
+    "object/name": "attachment",
+    "object/extensions/com.instructure.canvas/asset_type": "attachment",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000621"
+  },
+  "fileDeleted": {
+    "Note": "This seems to be the same type as attachmentDeleted",
+    "type": "Event",
+    "action": "Deleted",
+    "object/id": "urn:instructure:canvas:attachment:85530000000000621",
+    "object/type": "Document",
+    "objec/tname": "Docx Test File.docx",
+    "object/mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "object/extensions/com.instructure.canvas/context_id": "85530000000000032",
+    "object/extensions/com.instructure.canvas/context_type": "Course",
+    "object/extensions/com.instructure.canvas/filename": "Docx+Test+File.docx",
+    "object/extensions/com.instructure.canvas/folder_id": "85530000000000187",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000621"
+  },
+  "quizzes_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "quizzes",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "quizzes",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "quizCreated": {
+    "Note": "No analogue in examples",
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000420",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "Unnamed Quiz",
+    "object/extensions/com.instructure.canvas/workflow_state": "unpublished",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000420"
+  },
+  "quizModified": {
+    "Note": "No analogue in examples",
+    "type": "Event",
+    "action": "Modified",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000420",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "Unnamed Quiz",
+    "object/extensions/com.instructure.canvas/workflow_state": "unpublished | published",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000420"
+  },
+  "quizzes_quiz_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "quizzes:quiz",
+    "object/extensions/com.instructure.canvas/asset_type": "quizzes",
+    "object/extensions/com.instructure.canvas/asset_subtype": "quizzes:quiz",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000026"
+  },
+  "quizDeleted": {
+    "Note": "No analogue in examples",
+    "type": "Event",
+    "action": "Modified",
+    "object/id": "urn:instructure:canvas:assignment:85530000000000421",
+    "object/type": "AssignableDigitalResource",
+    "object/name": "Delete quiz",
+    "object/extensions/com.instructure.canvas/workflow_state": "deleted",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000421"
+  },
+  "pages_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:course:85530000000000032",
+    "object/type": "Entity",
+    "object/name": "pages",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "pages",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "pages_page_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:wikiPage:85530000000000029",
+    "object/type": "Page",
+    "object/extensions/com.instructure.canvas/asset_type": "wiki_page",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000029"
+  },
+  "pageCreate": {
+    "Note": "No analogue in examples",
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:wikiPage:85530000000000029",
+    "object/type": "Page",
+    "object/name": "Welcome Page",
+    "object/extensions/com.instructure.canvas/body": "<p>Welcome to the course</p>",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000029"
+  },
+  "roster_go_to": {
+    "type": "NavigationEvent",
+    "action": "NavigatedTo",
+    "object/id": "urn:instructure:canvas:course:85530000000000032",
+    "object/type": "Entity",
+    "object/name": "roster",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "roster",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000032"
+  },
+  "enrollmentStateCreated": {
+    "Note": "Some clarification needed on all enrollment events",
+    "type": "Event",
+    "action": "Created",
+    "object/type": "Entity",
+    "object/extensions/com.instructure.canvas/course_id": "urn:instructure:canvas:course:85530000000000032",
+    "object/extensions/com.instructure.canvas/user_id": "urn:instructure:canvas:user:85530000000002284",
+    "object/extensions/com.instructure.canvas/user_name": "Studenta Test",
+    "object/extensions/com.instructure.canvas/workflow_state": "creation_pending",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000002445"
+  },
+  "enrollmentStateCreated2": {
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:enrollment:85530000000002446",
+    "object/type": "Entity",
+    "object/extensions/com.instructure.canvas/access_is_current": true,
+    "object/extensions/com.instructure.canvas/restricted_access": false,
+    "object/extensions/com.instructure.canvas/state": "creation_pending",
+    "object/extensions/com.instructure.canvas/state_is_current": true,
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000002446"
+  },
+  "enrollmentModified": {
+    "type": "Event",
+    "action": "Modified",
+    "object/id": "urn:instructure:canvas:enrollment:85530000000002445",
+    "object/type": "Entity",
+    "object/extensions/com.instructure.canvas/access_is_current": true,
+    "object/extensions/com.instructure.canvas/restricted_access": false,
+    "object/extensions/com.instructure.canvas/state": "creation_pending",
+    "object/extensions/com.instructure.canvas/state_is_current": true,
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000002445"
+  },
+  "groupCategoryCreated": {
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:groupCategory:85530000000000183",
+    "object/type": "Entity",
+    "object/name": "Data Test Groups",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000183"
+  },
+  "groupCreated": {
+    "type": "Event",
+    "action": "Created",
+    "object/id": "urn:instructure:canvas:group:85530000000013045",
+    "object/type": "Group",
+    "object/name": "Data Test Group 1",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000013045"
+  },
+  "assignmentSubmit": {
+    "type": "AssignableEvent",
+    "action": "Submitted",
+    "object/id": "urn:instructure:canvas:submission:85530000000002764",
+    "object/type": "Attempt",
+    "object/extensions/com.instructure.canvas/submission_type": "online_text_entry",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000002764"
+  },
+  "announcements_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "announcements",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "announcements",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000031"
+  },
+  "grades_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "grades",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "grades",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000000031"
+  },
+  "enrollment_go_to": {
+    "action": "NavigatedTo",
+    "type": "NavigationEvent",
+    "object/type": "Entity",
+    "object/name": "enrollment",
+    "object/extensions/com.instructure.canvas/asset_type": "course",
+    "object/extensions/com.instructure.canvas/asset_subtype": "enrollment",
+    "object/extensions/com.instructure.canvas/entity_id": "85530000000002444"
+  }
+}
