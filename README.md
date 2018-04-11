@@ -50,6 +50,29 @@ cat INPUT | jq -c '.data[]' | jq -s '.' > OUTPUT
 ```
 Will produce an array of event objects.
 
+## REPO CONTENTS
+
+This README.md and a file with all identified event types. The json in that file contains the markers of the event type they specify.
+
+For example:
+
+```json
+"syllabusUpdated": {
+    "type": "Event",
+    "action": "Modified",
+    "object/type": "Document",
+    "object/name": "Syllabus"
+  }
+```
+says, in other words, that in order to find all syllabus update events, you need to match the events that have those values. The `/` in `"object/type"` and `"object/name"`is a shorthand way of saying:
+
+```json
+"object":{
+  "type":"Document",
+  "name":"Syllabus"
+}
+```
+
 ## SELECTING A SUBSET
 
 Can select slices with a select as the first piped command. All further examples use the unwrapped format. With wrapped formats need to unwrap first:
