@@ -115,5 +115,5 @@ Add `'sort_by(.KEY_NAME) |.'` as the last command to get a a list sorte on the s
 i.e. this will select all events by user xxx and sort them by time:
 
 ```bash
-cat INPUT  | jq '.|select(.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="xxx") |  {key/value pairs}' | jq -s 'sort_by(.event_time) |.' > OUTPUT
+cat INPUT  | jq '.|select(.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="xxx") | jq -s 'sort_by(.eventTime) |.' > OUTPUT
 ```
