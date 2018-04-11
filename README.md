@@ -81,7 +81,7 @@ If wrap is an object with escaped json:
 
 `cat INPUT | jq -c '.event | fromjson'` and then pipe to the select command.
 
-For example, this selects only events by user with login id of "exampleusername"
+For example, this selects only events by user with login id of "exampleusername". Note the select syntax `select(.actor.extensions?` - the '?' means essentially `if exists` - not all keys will be available in all the events. This keeps `jq` from throwing errors.
 
 ```bash
 cat INPUT | jq -c '.event | fromjson' | jq '.|select(.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="exampleusername") |  {key value pairs you want in the output}' | jq -s '.' > OUTPUT
