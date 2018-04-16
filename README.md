@@ -140,3 +140,54 @@ i.e. this will select all events by user xxx and sort them by time:
 ```bash
 cat INPUT  | jq '.|select(.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="xxx") | jq -s 'sort_by(.eventTime) |.' > OUTPUT
 ```
+
+## SOME EXAMPLES
+
+You can run these against the testX_raw.json files in the Box folder. The select logic is derived from the identification of the event as outlined in all_events_match.json.
+
+All the queries have the following pipes:
+
+unwrapping the event  `jq -c '.data[]'`
+
+selecting the data `'.|select((.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and (.object.name?=="attachment" and .action=="NavigatedTo"))`
+
+specifying the attributes of the resulting objects `{att_id:.object.id, eventTime: .eventTime, course_id: .group.id}`
+
+### Files
+
+All the events associated with files viewed by studenta@umich.edu (user test4_raw.json):
+
+```bash
+cat INPUT | jq -c '.data[]' | jq '.|select((.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and (.object.name?=="attachment" and .action=="NavigatedTo"))' | jq -s '.' > OUTPUT
+```
+
+All the events associated with files viewed by studenta@umich.edu (user test4_raw.json) - but this time we are just outputting file id, event time and course id:
+
+```bash
+cat INPUT | jq -c '.data[]' | jq '.|select((.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and (.object.name?=="attachment" and .action=="NavigatedTo")) | {att_id:.object.id, eventTime: .eventTime, course_id: .group.id}' | jq -s '.' > OUTPUT
+```
+
+### Announcement list views
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="AssignableEvent" and .type =="Submitted")' | jq -s '.' > OUTPUT
+```
+
+### Assignments Submitted
+
+By anyone anywhere
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent")' | jq -s '.'  > OUTPUT
+```
+
+By studenta@umich.edu anywhere
+
+```bash
+|  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu"))' | jq -s '.'
+```
+By studenta@umich.edu  in a specific course
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'
+```
