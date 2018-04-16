@@ -234,7 +234,7 @@ cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="As
 By all students, anywhere, on a given day:
 
 ```bash
-cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime>="2018-03-16")' | jq -s '.' > OUTPUT
+cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime<="2018-03-17" and .eventTime>="2018-03-16")' | jq -s '.' > OUTPUT
 ```
 
 ### Human events only
