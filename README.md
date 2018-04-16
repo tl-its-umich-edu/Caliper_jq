@@ -229,16 +229,22 @@ cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="Ass
 By studenta@umich.edu anywhere
 
 ```bash
-|  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu"))' | jq -s '.'
+cat INPUT | jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu"))' | jq -s '.'  > OUTPUT
 ```
 By studenta@umich.edu  in a specific course
 
 ```bash
-cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'
+cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'  > OUTPUT
 ```
 
 By all students, anywhere, on a given day:
 
 ```bash
-|  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime>="2018-03-16")' | jq -s '.'
+cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime>="2018-03-16")' | jq -s '.' > OUTPUT
+```
+
+### Human events only
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select(.actor.extensions?) | jq -s '.' > OUTPUT
 ```
