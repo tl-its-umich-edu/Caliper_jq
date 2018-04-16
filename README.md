@@ -37,7 +37,13 @@
 
 `extensions` will give you server url, user agent etc.
 
+## DATA FILES
 
+Can be gotten from the Student and the Instructor folders at:
+
+https://umich.app.box.com/folder/47628402451
+
+Use the ones that have `testN_raw.json` format.
 
 ## SOURCE ISSUES
 
