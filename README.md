@@ -212,12 +212,6 @@ All the events associated with files viewed by studenta@umich.edu (user test4_ra
 cat INPUT | jq -c '.data[]' | jq '.|select((.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and (.object.name?=="attachment" and .action=="NavigatedTo")) | {att_id:.object.id, eventTime: .eventTime, course_id: .group.id}' | jq -s '.' > OUTPUT
 ```
 
-### Announcement list views
-
-```bash
-cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="AssignableEvent" and .type =="Submitted")' | jq -s '.' > OUTPUT
-```
-
 ### Assignments Submitted
 
 By anyone anywhere
