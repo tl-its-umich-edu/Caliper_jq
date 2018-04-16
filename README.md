@@ -23,13 +23,13 @@
 
 `type, action` are the main identifiers
 
-`actor` contains details on the user (id, type), most of them unfortunately inside an `.extensions.com.instructure.canvas` object
+`actor` contains details on the user (id, type), most of them unfortunately inside an `.extensions['com.instructure.canvas']` object
 
-`object` will contain details on the `action` - again most of them unfortunately inside an `.extensions.com.instructure.canvas` object
+`object` will contain details on the `action` - again most of them unfortunately inside an `.extensions['com.instructure.canvas']` object
 
 `edApp` will tell you what software emitted the event
 
-`group` holds details on the context of the event (a course say for CLE)
+`group` holds details on the context of the event (a course say for CLE, a problem set in LECCAP, or maybe a Course as well)
 
 `membership` will explain relationship of the user to the context
 
@@ -41,7 +41,9 @@
 
 ## SOURCE ISSUES
 
-### Unwrapped jsonl
+I have seen 3 different shapes to Caliper `jsonl`, I guess they depend on how they were extracted.
+
+### 1. Unwrapped jsonl
 
 Data is NOT in wrapper:
 
@@ -55,7 +57,7 @@ Data is NOT in wrapper:
 cat INPUT | jq -c '{key/value pairs you want in the output - i.e: event_id: .id}' | jq -s '.' > OUTPUT
 ```
 
-### Data is escaped json inside an "event" object:
+### 2. Data is escaped json inside an "event" object:
 
 ```json
   {
@@ -72,7 +74,7 @@ The command below parses the event object then pipes the result to another comma
 cat INPUT | jq -c '.event | fromjson' | jq '.| {key/value pairs you want in the output - i.e. event_id: id, etc. }' | jq -s '.' > OUTPUT
 ```
 
-### Event or events inside a "data" array:
+### 3. Event or events inside a "data" array:
 
 ```json
 {
