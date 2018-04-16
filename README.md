@@ -2,6 +2,43 @@
 
 # DEALING WITH CALIPER Data
 
+## GENERAL STRUCTURE OF THE EVENT
+
+```json
+{
+   "@context": "http://purl.imsglobal.org/ctx/caliper/v1p1",
+   "id": "urn:uuid:438ff0c6-1231-4a83-8084-23eb67feaf62",
+   "type": "AssignableEvent",
+   "actor": {},
+   "action": "Submitted",
+   "object": {},
+   "eventTime": "2018-03-16T16:33:29.000Z",
+   "edApp": {},
+   "group": {},
+   "membership": {},
+   "session": {},
+   "extensions": {}
+ }
+```
+
+`type, action` are the main identifiers
+
+`actor` contains details on the user (id, type), most of them unfortunately inside an `.extensions.com.instructure.canvas` object
+
+`object` will contain details on the `action` - again most of them unfortunately inside an `.extensions.com.instructure.canvas` object
+
+`edApp` will tell you what software emitted the event
+
+`group` holds details on the context of the event (a course say for CLE)
+
+`membership` will explain relationship of the user to the context
+
+`sessions` will detail session stuff
+
+`extensions` will give you server url, user agent etc.
+
+
+
 ## SOURCE ISSUES
 
 ### Unwrapped jsonl
@@ -190,4 +227,10 @@ By studenta@umich.edu  in a specific course
 
 ```bash
 cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Submitted" and .type=="AssignableEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'
+```
+
+By all students, anywhere, on a given day:
+
+```bash
+|  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime>="2018-03-16")' | jq -s '.'
 ```
