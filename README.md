@@ -237,6 +237,32 @@ By all students, anywhere, on a given day:
 cat INPUT |  jq -c '.data[]' | jq '.|select(.action=="Submitted" and .type=="AssignableEvent" and .eventTime<="2018-03-17" and .eventTime>="2018-03-16")' | jq -s '.' > OUTPUT
 ```
 
+### Discussion things
+
+Threads created by **studenta@umich.edu** in a given course
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Created" and .type=="ThreadEvent") and (.actor.extensions? | . ["com.instructure.canvas"] | . .user_login?=="studenta@umich.edu") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'  > OUTPUT
+```
+
+All threads created in a given course
+
+```bash
+cat INPUT | jq -c '.data[]' | jq '.|select((.action=="Created" and .type=="ThreadEvent") and .group.id=="urn:instructure:canvas:course:85530000000000031")' | jq -s '.'  > OUTPUT
+```
+
+All threads created by students in a given course. Note: the `.membership.roles` value will always be an array. Am sure there is a way in jq to search in an array. Checking in the first element is not good.
+
+```bash
+cat INPUT |  jq -c '.data[]' | jq '.|select((.action=="Created" and .type=="ThreadEvent") and .group.id=="urn:instructure:canvas:course:85530000000000031" and .membership.roles[0] =="Learner")' | jq -s '.'
+```
+
+All thread replies in a given course by students
+
+```bash
+cat INPUT | jq -c '.data[]' | jq '.|select((.action=="Posted" and .type=="MessageEvent") and .group.id=="urn:instructure:canvas:course:85530000000000031" and .membership.roles[0]=="Learner")' | jq -s '.'  > OUTPUT
+```
+
 ### Human events only
 
 ```bash
