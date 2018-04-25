@@ -80,7 +80,7 @@ The command below parses the event object then pipes the result to another comma
 cat INPUT | jq -c '.event | fromjson' | jq '.| {key/value pairs you want in the output - i.e. event_id: id, etc. }' | jq -s '.' > OUTPUT
 ```
 
-### 3. Event or events inside a "data" array:
+### 3. Event or events inside a "data (or raw)" array:
 
 ```json
 {
@@ -117,6 +117,34 @@ says, in other words, that in order to find all syllabus update events, you need
   "name":"Syllabus"
 }
 ```
+## DEALING WITH MASSIVE FILES
+
+Below - we are dealing with a 6G INPUT that has one of the three formats above - events are escaped objects inside of a "raw" array. THe source data was leccap from LRS
+
+```bash
+cat INPUT | jq -c '.raw | fromjson' | jq -n '[inputs]' |  jq -c '[.[] | {type:.["@type"], name:.actor.name, eventTime:.eventTime, action:.action, video:.object.isPartOf.name, course:.group.name,id:.openlrsSourceId}]’ > OUTPUT
+```
+
+The parts:
+
+for each line, pick only the contents of the "raw" array and unescape/parse:
+
+```bash
+| jq -c '.raw | fromjson' |
+```
+
+Treat the INPUT as a stream (jq 1.5) - because it is too large to use --slurp (reading into memory)
+
+```bash
+| jq -n '[inputs]' |
+```
+
+Use an array constructor to wrap all the resulting objects into an array.
+
+```bash
+ jq -c '[.[] | {key:value, key:value}]’
+```
+
 
 ## SELECTING A SUBSET
 
