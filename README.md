@@ -121,13 +121,13 @@ says, in other words, that in order to find all syllabus update events, you need
 
 Some context. What follows is not a recipe a discursive process.
 
-1. Begin: 150 G of data - everything in the OpenLRS since forever.
+1). Begin: 150 G of data - everything in the OpenLRS since forever.
 
-2. Grepped for only the events emitted by LectureCapture.
+2). Grepped for only the events emitted by LectureCapture.
 
-3. Grepped in these for events containing "CHEM 130".
+3). Grepped in these for events containing "CHEM 130".
 
-4. Used jq to select all events except session events.
+4). Used jq to select all events except session events.
 
     ```bash
     cat  chem130.jsonl | jq -c '.raw | fromjson' | jq -n '[inputs]' | jq '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")' | jq -c  '.' > chem130-nosess.jsonl
@@ -135,13 +135,13 @@ Some context. What follows is not a recipe a discursive process.
 
 The parts
 
-4a. For each line, pick only the contents of the "raw" array and unescape/parse:
+4a). For each line, pick only the contents of the "raw" array and unescape/parse:
 
     ```bash
     | jq -c '.raw | fromjson' |
     ```
 
-4b. Treat the INPUT as a stream (jq 1.5) - because it is too large to use --slurp (reading into memory)
+4b). Treat the INPUT as a stream (jq 1.5) - because it is too large to use --slurp (reading into memory)
 
     ```bash
     | jq -n '[inputs]' |
@@ -153,7 +153,7 @@ The parts
     '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")'
     ```
 
-5. Used jq to produce a slimmed down version of this last one:
+5). Used jq to produce a slimmed down version of this last one:
 
 ```bash
 cat chem130-nosess.jsonl | jq -n '[inputs]' | jq -c '[.[] |{actor:.actor.name, uniqname:.actor | (.["@id"]| (.[38:])), type:(.["@type"] | (.[37:])), eventTime:.eventTime,action:(.action | (.[50:])),video:.object.isPartOf.name, course: (.group.name // .object.isPartOf.isPartOf.name), id:.openlrsSourceId}]' > chem130-slim.json
@@ -161,12 +161,12 @@ cat chem130-nosess.jsonl | jq -n '[inputs]' | jq -c '[.[] |{actor:.actor.name, u
 
 The new parts:
 
-5a. Use an array constructor to wrap all the resulting objects into an array.
+5a). Use an array constructor to wrap all the resulting objects into an array.
 
 ```bash
  jq -c '[.[] | {key:value, key:value}]’
 ```
-5c. Some interesting things
+5c). Some interesting things
 
 String parsing. User id, event type and event action are urls. Extract only the uniqname, etc. @id and @type need to be quoted and bracketed because of the '@'
 
