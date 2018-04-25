@@ -119,15 +119,23 @@ says, in other words, that in order to find all syllabus update events, you need
 ```
 ## DEALING WITH MASSIVE FILES
 
-Below - we are dealing with a 6G INPUT that has one of the three formats above - events are escaped objects inside of a "raw" array. THe source data was leccap from LRS
+Some context. What follows is not a recipe a discursive process.
+
+Begin: 150 G of data - everything in the OpenLRS since forever.
+
+Grepped for only the events emitted by LectureCapture.
+
+Grepped in these for events containing "CHEM 130".
+
+Used jq to select all events except session events.
 
 ```bash
-cat INPUT | jq -c '.raw | fromjson' | jq -n '[inputs]' |  jq -c '[.[] | {type:.["@type"], name:.actor.name, eventTime:.eventTime, action:.action, video:.object.isPartOf.name, course:.group.name,id:.openlrsSourceId}]’ > OUTPUT
+cat  chem130.jsonl | jq -c '.raw | fromjson' | jq -n '[inputs]' | jq '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")' | jq -c  '.' > chem130-nosess.jsonl
 ```
 
-The parts:
+The parts
 
-for each line, pick only the contents of the "raw" array and unescape/parse:
+For each line, pick only the contents of the "raw" array and unescape/parse:
 
 ```bash
 | jq -c '.raw | fromjson' |
@@ -139,12 +147,43 @@ Treat the INPUT as a stream (jq 1.5) - because it is too large to use --slurp (r
 | jq -n '[inputs]' |
 ```
 
+Select only non-session events:
+
+```bash
+'.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")'
+```
+
+
+Used jq to produce a slimmed down version of this last one:
+
+```bash
+cat chem130-nosess.jsonl | jq -n '[inputs]' | jq -c '[.[] |{actor:.actor.name, uniqname:.actor | (.["@id"]| (.[38:])), type:(.["@type"] | (.[37:])), eventTime:.eventTime,action:(.action | (.[50:])),video:.object.isPartOf.name, course: (.group.name // .object.isPartOf.isPartOf.name), id:.openlrsSourceId}]' > chem130-slim.json
+```
+
+The new parts:
+
 Use an array constructor to wrap all the resulting objects into an array.
 
 ```bash
  jq -c '[.[] | {key:value, key:value}]’
 ```
+Some interesting things
 
+String parsing. User id, event type and event action are urls. Extract only the uniqname, etc. @id and @type need to be quoted and bracketed because of the '@'
+
+```
+uniqname:.actor | (.["@id"]| (.[38:]))
+type:(.["@type"] | (.[37:]))
+(.action | (.[50:]))
+```
+
+Am sure there is a good reason for it - but the course name can be in `.group.name` or in `.object.isPartOf.isPartOf.name`
+
+Doing this ensures something comes out at the end.
+
+````
+.group.name // .object.isPartOf.isPartOf.name
+```
 
 ## SELECTING A SUBSET
 
