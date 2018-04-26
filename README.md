@@ -129,29 +129,29 @@ Some context. What follows is not a recipe a discursive process.
 
 4). Used jq to select all events except session events.
 
-    ```bash
-    cat  chem130.jsonl | jq -c '.raw | fromjson' | jq -n '[inputs]' | jq '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")' | jq -c  '.' > chem130-nosess.jsonl
-    ```
+```bash
+cat  chem130.jsonl | jq -c '.raw | fromjson' | jq -n '[inputs]' | jq '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")' | jq -c  '.' > chem130-nosess.jsonl
+```
 
 The parts
 
 4a). For each line, pick only the contents of the "raw" array and unescape/parse:
 
-    ```bash
-    | jq -c '.raw | fromjson' |
-    ```
+```bash
+| jq -c '.raw | fromjson' |
+```
 
 4b). Treat the INPUT as a stream (jq 1.5) - because it is too large to use --slurp (reading into memory)
 
-    ```bash
-    | jq -n '[inputs]' |
-    ```
+```bash
+| jq -n '[inputs]' |
+```
 
 4c. Select only non-session events:
 
-    ```bash
-    '.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")'
-    ```
+```bash
+'.[]|select(.["@type"]!="http://purl.imsglobal.org/caliper/v1/SessionEvent")'
+```
 
 5). Used jq to produce a slimmed down version of this last one:
 
