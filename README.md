@@ -180,7 +180,7 @@ Am sure there is a good reason for it - but the course name can be in `.group.na
 
 Doing this ensures something comes out at the end.
 
-````
+``` bash
 .group.name // .object.isPartOf.isPartOf.name
 ```
 
